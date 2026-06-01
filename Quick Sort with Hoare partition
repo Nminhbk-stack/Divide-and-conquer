@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using ll = long long;
+
+int partitionn(int a[], int l, int r){
+    int i = l; int j = r;
+    while(1){
+        while(a[i] < a[l]){
+            ++i;
+        }
+        while(a[j] > a[l]){
+            --j;
+        }
+        if(i < j){
+            swap(a[i], a[j]);
+            ++i; --j;
+        }
+        else return j;
+    }
+}
+
+void quicksort(int a[], int l, int r){
+    if(l < r){
+        int p = partitionn(a, l, r);
+        quicksort(a, l, p);
+        quicksort(a, p+1, r);
+    }
+}
+
+
+
+int main(){
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int n; cin >> n;
+    int a[n];
+    for(int i = 1; i<=n; i++){
+        cin >> a[i];
+    }
+    quicksort(a, 1, n);
+    for(int i = 1; i<=n; i++){
+        cout << a[i] << " ";
+    }
+
+
+    return 0;
+}
